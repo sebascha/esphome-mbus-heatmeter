@@ -84,9 +84,9 @@ Auch **Kältezähler, Wasserzähler und Gaszähler** mit M-Bus lassen sich mit d
 | 1 | **ESP32 DevKitC V4** (ESP32-WROOM-32D/32U) | ~6 € | [AliExpress](https://de.aliexpress.com/item/1005007820190456.html) |
 | 2 | **TTL-zu-M-Bus-Master-Modul** (1–10 Slaves, Eingang 4–18 V) | ~12 € | [AliExpress](https://de.aliexpress.com/item/1005006293773527.html) |
 | 3 | **Qundis Q module 5.5 M-Bus** (MHM500A20000) | ~40 € | [eBay](https://www.ebay.de/itm/286814945093), Zählershops |
-| 4 | USB-Netzteil 5 V + Kabel | ~5 € | Restekiste |
-| 5 | 4–6 Dupont-Kabel (female-female) | ~2 € | Restekiste |
-| 6 | 2-adrige Leitung für den Bus (z. B. Klingeldraht, J-Y(St)Y) | ~2 € | Restekiste |
+| 4 | USB-Netzteil 5 V + Kabel | ~5 € | 
+| 5 | 4–6 Dupont-Kabel (female-female) | ~2 € |
+
 
 **Wichtig bei Position 2:** Diese Module werden als **Master-** *und* **Slave-Variante** unter derselben Artikelnummer verkauft. Zum Auslesen eines Zählers wird zwingend die **Master**-Variante benötigt. Achte außerdem auf einen `TTLVCC`- bzw. `VREF`-Pin — darüber wird der Logikpegel auf 3,3 V gesetzt, sodass kein Pegelwandler nötig ist.
 
