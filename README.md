@@ -1,5 +1,5 @@
 # esphome-mbus-heatmeter
-Dieses Projekt nutzt die externe ESPHome-Komponente eegerferenc/esphome-mbus-component 
+**Dieses Projekt nutzt die externe ESPHome-Komponente eegerferenc/esphome-mbus-component **
 **Read heat meters (M-Bus, EN 13757-3) with an ESP32 and expose them to Home Assistant via ESPHome — no cloud, no gateway.** Documentation below is in German.
 
 ---
