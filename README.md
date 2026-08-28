@@ -17,7 +17,6 @@ Ausgelesen werden je nach Zähler:
 | Spreizung | K | Momentanwert |
 | Leistung | W | Momentanwert — die eigentlich interessante Größe |
 
-Motivation: Wer eine Wärmepumpe, eine Solarthermie oder eine Wohnungsstation regelt oder überwacht, will wissen, wie viel Wärme **tatsächlich** geliefert wurde — nicht, wie lange ein Schaltkontakt geschlossen war. Ein vorhandener Wärmemengenzähler weiß das bereits; er muss nur reden dürfen.
 
 Gesamtkosten: **rund 55–70 €.** Stromverbrauch: **~1 W** (≈ 9 kWh/Jahr).
 
