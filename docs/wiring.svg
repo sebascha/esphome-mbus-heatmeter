@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 660" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+  <rect width="980" height="660" fill="#fafaf7"/>
+  <text x="30" y="42" font-size="24" font-weight="700" fill="#1a1a1a">WMZ M-Bus Bridge — Verdrahtung</text>
+  <text x="30" y="66" font-size="13" fill="#555">ESP32 DevKitC V4  ·  TTL-M-Bus-Master  ·  M-Bus-Aufsatzmodul auf dem Wärmemengenzähler</text>
+
+  <rect x="30" y="120" width="130" height="70" rx="8" fill="#eceff1" stroke="#90a4ae" stroke-width="1.5"/>
+  <text x="95" y="150" font-size="14" font-weight="600" text-anchor="middle" fill="#263238">USB-Netzteil</text>
+  <text x="95" y="170" font-size="12" text-anchor="middle" fill="#546e7a">5 V</text>
+  <line x1="160" y1="155" x2="225" y2="155" stroke="#455a64" stroke-width="3"/>
+  <text x="192" y="147" font-size="11" text-anchor="middle" fill="#455a64">USB-Kabel</text>
+
+  <rect x="225" y="100" width="215" height="360" rx="10" fill="#e8f0e9" stroke="#4c7a54" stroke-width="2"/>
+  <text x="332" y="130" font-size="16" font-weight="700" text-anchor="middle" fill="#2e4d33">ESP32 DevKitC V4</text>
+  <text x="332" y="148" font-size="11" text-anchor="middle" fill="#4c7a54">Versorgung über USB-Buchse</text>
+  <g font-size="13" fill="#1a1a1a">
+    <circle cx="440" cy="190" r="4" fill="#c62828"/><text x="428" y="194" text-anchor="end">5V / VIN</text>
+    <circle cx="440" cy="240" r="4" fill="#212121"/><text x="428" y="244" text-anchor="end">GND</text>
+    <circle cx="440" cy="290" r="4" fill="#ef6c00"/><text x="428" y="294" text-anchor="end">3V3</text>
+    <circle cx="440" cy="340" r="4" fill="#616161"/><text x="428" y="344" text-anchor="end">GND (2. Ader)</text>
+    <circle cx="440" cy="390" r="4" fill="#2e7d32"/><text x="428" y="394" text-anchor="end">GPIO17 (TX2)</text>
+    <circle cx="440" cy="440" r="4" fill="#1565c0"/><text x="428" y="444" text-anchor="end">GPIO16 (RX2)</text>
+  </g>
+
+  <rect x="590" y="100" width="215" height="360" rx="10" fill="#e9edf5" stroke="#3f5c8a" stroke-width="2"/>
+  <text x="697" y="130" font-size="16" font-weight="700" text-anchor="middle" fill="#27395c">TTL-M-Bus-Master</text>
+  <text x="697" y="148" font-size="11" text-anchor="middle" fill="#3f5c8a">Eingang 4–18 V · Pegel via TTLVCC</text>
+  <g font-size="13" fill="#1a1a1a">
+    <circle cx="590" cy="190" r="4" fill="#c62828"/><text x="602" y="194">VIN</text>
+    <circle cx="590" cy="240" r="4" fill="#212121"/><text x="602" y="244">GND (bei VIN)</text>
+    <circle cx="590" cy="290" r="4" fill="#ef6c00"/><text x="602" y="294">TTLVCC / VREF</text>
+    <circle cx="590" cy="340" r="4" fill="#616161"/><text x="602" y="344">GND (bei TTLVCC)</text>
+    <circle cx="590" cy="390" r="4" fill="#2e7d32"/><text x="602" y="394">TXD</text>
+    <circle cx="590" cy="440" r="4" fill="#1565c0"/><text x="602" y="444">RXD</text>
+    <circle cx="805" cy="240" r="4" fill="#6a1b9a"/><text x="793" y="230" text-anchor="end" font-size="12">M+</text>
+    <circle cx="805" cy="300" r="4" fill="#6a1b9a"/><text x="793" y="322" text-anchor="end" font-size="12">M−</text>
+    <text x="700" y="425" font-size="11" fill="#78909c">VH = Messpunkt Busspannung</text>
+    <text x="700" y="441" font-size="11" fill="#78909c">Overload = Kurzschluss-LED</text>
+  </g>
+
+  <line x1="440" y1="190" x2="590" y2="190" stroke="#c62828" stroke-width="2.5"/>
+  <text x="515" y="182" font-size="11" text-anchor="middle" fill="#c62828">5 V</text>
+  <line x1="440" y1="240" x2="590" y2="240" stroke="#212121" stroke-width="2.5"/>
+  <text x="515" y="232" font-size="11" text-anchor="middle" fill="#212121">Masse</text>
+  <line x1="440" y1="290" x2="590" y2="290" stroke="#ef6c00" stroke-width="2.5"/>
+  <text x="515" y="282" font-size="11" text-anchor="middle" fill="#ef6c00">3,3 V Referenz</text>
+  <line x1="440" y1="340" x2="590" y2="340" stroke="#616161" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="515" y="332" font-size="11" text-anchor="middle" fill="#616161">Masse (Logikseite)</text>
+  <line x1="440" y1="390" x2="590" y2="390" stroke="#2e7d32" stroke-width="2.5"/>
+  <text x="515" y="382" font-size="11" text-anchor="middle" fill="#2e7d32">TX2 → TXD (ungekreuzt!)</text>
+  <line x1="440" y1="440" x2="590" y2="440" stroke="#1565c0" stroke-width="2.5"/>
+  <text x="515" y="432" font-size="11" text-anchor="middle" fill="#1565c0">RX2 → RXD (ungekreuzt!)</text>
+
+  <rect x="620" y="500" width="330" height="130" rx="10" fill="#f3ede4" stroke="#8a6d3f" stroke-width="2"/>
+  <text x="785" y="530" font-size="15" font-weight="700" text-anchor="middle" fill="#5c4827">Wärmemengenzähler</text>
+  <rect x="655" y="545" width="260" height="60" rx="6" fill="#fff" stroke="#8a6d3f" stroke-width="1.2"/>
+  <text x="785" y="568" font-size="13" font-weight="600" text-anchor="middle" fill="#5c4827">M-Bus-Aufsatzmodul</text>
+  <circle cx="740" cy="588" r="4" fill="#6a1b9a"/><circle cx="830" cy="588" r="4" fill="#6a1b9a"/>
+  <text x="785" y="592" font-size="11" text-anchor="middle" fill="#5c4827">2 Klemmen</text>
+
+  <path d="M805 240 C 910 240 910 588 830 588" fill="none" stroke="#6a1b9a" stroke-width="2.5"/>
+  <path d="M805 300 C 875 300 875 588 740 588" fill="none" stroke="#6a1b9a" stroke-width="2.5"/>
+  <text x="912" y="430" font-size="11" fill="#6a1b9a" text-anchor="middle">2-adrig,</text>
+  <text x="912" y="445" font-size="11" fill="#6a1b9a" text-anchor="middle">Polung egal</text>
+
+  <rect x="30" y="500" width="560" height="130" rx="8" fill="#fff" stroke="#bbb" stroke-width="1"/>
+  <text x="48" y="526" font-size="13" font-weight="700" fill="#1a1a1a">Hinweise</text>
+  <g font-size="12" fill="#333">
+    <text x="48" y="548">· Silkscreen „TXD--TXD" = Pin erwartet das TX-Signal des Hosts → NICHT kreuzen.</text>
+    <text x="48" y="568">· Keine Antwort? Zuerst TXD/RXD tauschen — schadet nichts, klärt in 10 Sekunden.</text>
+    <text x="48" y="588">· VH und Overload bleiben unbeschaltet (Messpunkt bzw. LED).</text>
+    <text x="48" y="608">· Test: ~27–36 V DC zwischen M+ und M− bei versorgtem Master.</text>
+  </g>
+</svg>

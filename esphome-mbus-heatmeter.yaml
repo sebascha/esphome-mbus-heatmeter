@@ -1,0 +1,163 @@
+# esphome-mbus-heatmeter
+# ESP32 als M-Bus-Master fuer Waermemengenzaehler
+# https://github.com/sebascha/esphome-mbus-heatmeter
+#
+# Getestet mit: Rossweiner heatplus OPTO (= Qundis Q heat 5.5)
+#               + Qundis Q module 5.5 M-Bus (MHM500A20000)
+#
+# Voraussetzung: Die Komponente "mbus" aus
+#   https://github.com/eegerferenc/esphome-mbus-component
+# muss lokal unter <esphome-config>/components/mbus/ liegen (siehe README).
+
+substitutions:
+  device_name: mbus-heatmeter
+  friendly_name: M-Bus Heatmeter
+  # UART-Pins zum M-Bus-Master
+  tx_pin: GPIO17          # ESP TX2 -> TXD des Masters (NICHT kreuzen)
+  rx_pin: GPIO16          # ESP RX2 -> RXD des Masters
+  # Das Aufsatzmodul uebernimmt Zaehlerwerte nur alle 10 Minuten -
+  # kuerzer abzufragen bringt keine frischeren Daten.
+  poll_interval: 600s
+
+esphome:
+  name: ${device_name}
+  friendly_name: ${friendly_name}
+
+esp32:
+  variant: esp32
+  cpu_frequency: 80MHz    # Stromsparen: reicht fuer M-Bus-Polling locker
+
+logger:
+  # Fuer die Inbetriebnahme bzw. Telegramm-Analyse:
+  # level: DEBUG
+
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  power_save_mode: light  # Stromsparen; bei instabilem WLAN auf "none" setzen
+  ap:
+    ssid: ${friendly_name} Fallback
+    password: !secret ap_password
+
+captive_portal:
+
+external_components:
+  - source:
+      type: local
+      path: components
+    components: [mbus]
+
+# M-Bus nach EN 13757-3: 2400 Baud, 8 Datenbits, EVEN-Paritaet, 1 Stoppbit.
+# Die Even-Paritaet ist zwingend - haeufigster Fehler bei Selbstbau-Bridges.
+uart:
+  id: mbus_uart
+  tx_pin: ${tx_pin}
+  rx_pin: ${rx_pin}
+  baud_rate: 2400
+  data_bits: 8
+  parity: EVEN
+  stop_bits: 1
+
+mbus:
+  - id: heatmeter
+    uart_id: mbus_uart
+    update_interval: ${poll_interval}
+    # secondary_address: 0x1234567890ABCDEF
+    #   Nur noetig, wenn MEHRERE Zaehler am selben Bus haengen.
+    #   Achtung: Bei explizit gesetzter Adresse finden die Sensoren ihre
+    #   Records derzeit nicht (Byte-Reihenfolge im Adressvergleich der
+    #   Komponente). Mit der Default-Wildcard funktioniert alles.
+
+sensor:
+  # ---- Zaehlerstaende (Storage 0 = aktuelle Werte) ---------------------
+  - platform: mbus
+    mbus_id: heatmeter
+    name: "Waermemenge"
+    mbus_vife: 0x05               # BCD8, 100-Wh-Schritte
+    filters:
+      - multiply: 0.1
+    unit_of_measurement: kWh
+    device_class: energy
+    state_class: total_increasing
+    accuracy_decimals: 1
+
+  - platform: mbus
+    mbus_id: heatmeter
+    name: "Volumen"
+    mbus_vife: 0x13               # BCD8, Liter
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: "m³"
+    device_class: water
+    state_class: total_increasing
+    accuracy_decimals: 3
+
+  # ---- Momentanwerte ---------------------------------------------------
+  - platform: mbus
+    mbus_id: heatmeter
+    name: "Durchfluss"
+    mbus_vife: 0x3B               # INT24, l/h
+    unit_of_measurement: "l/h"
+    state_class: measurement
+    accuracy_decimals: 0
+    icon: mdi:water-pump
+
+  - platform: mbus
+    mbus_id: heatmeter
+    name: "Leistung"
+    mbus_vife: 0x2B               # INT32, W
+    unit_of_measurement: "W"
+    device_class: power
+    state_class: measurement
+    accuracy_decimals: 0
+
+  - platform: mbus
+    mbus_id: heatmeter
+    name: "Vorlauftemperatur"
+    mbus_vife: 0x5A               # INT16, 0,1 K
+    filters:
+      - multiply: 0.1
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state_class: measurement
+    accuracy_decimals: 1
+
+  - platform: mbus
+    mbus_id: heatmeter
+    name: "Ruecklauftemperatur"
+    mbus_vife: 0x5E               # INT16, 0,1 K
+    filters:
+      - multiply: 0.1
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state_class: measurement
+    accuracy_decimals: 1
+
+  - platform: mbus
+    mbus_id: heatmeter
+    name: "Spreizung"
+    mbus_vife: 0x62               # INT16, 0,1 K
+    filters:
+      - multiply: 0.1
+    unit_of_measurement: "K"
+    state_class: measurement
+    accuracy_decimals: 1
+    icon: mdi:swap-vertical
+
+  # ---- Diagnose --------------------------------------------------------
+  - platform: wifi_signal
+    name: "WLAN-Signal"
+    update_interval: 60s
+    entity_category: diagnostic
+
+  - platform: uptime
+    name: "Laufzeit"
+    entity_category: diagnostic
