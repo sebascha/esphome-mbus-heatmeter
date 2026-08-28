@@ -72,9 +72,6 @@ Diese Zähler sprechen ebenfalls drahtgebundenen M-Bus und sollten mit angepasst
 - **Kamstrup Multical 302 / 403 / 603** — M-Bus-Modul, Werte teils in anderen Einheiten
 - **Itron / Allmess CF Echo II, Integral-MK**
 - **Landis+Gyr T230 / T450**
-- **Techem, ista, Minol** — Mietgeräte, siehe Warnhinweis unten
-
-> **Mietgeräte:** Zähler von Messdienstleistern (Techem, ista, Minol, Brunata …) gehören meist nicht dem Nutzer. Das Aufstecken eines eigenen Kommunikationsmoduls kann Vertrags- oder Plombenfragen berühren. Vorher klären.
 
 Auch **Kältezähler, Wasserzähler und Gaszähler** mit M-Bus lassen sich mit derselben Hardware auslesen — nur die Sensordefinitionen unterscheiden sich.
 
@@ -147,8 +144,6 @@ cp -r /tmp/mbus-src/mbus <esphome-config-dir>/components/
 
 ### 3. Modul aufstecken
 
-**Das Aufsatzmodul muss auf dem Zähler sitzen, bevor sinnvolle Daten kommen.** Ein lose an den Bus geklemmtes Modul antwortet zwar — aber nur mit seiner eigenen Selbstauskunft (Medium „unbekannt", eigene Seriennummer, keine Verbrauchswerte). Plan aufstecken bis zum spürbaren Einrasten.
-
 Nach dem Aufstecken **10–15 Minuten warten**: Das Modul liest den Zähler intern nur alle 10 Minuten aus.
 
 ### 4. Flashen und prüfen
@@ -168,16 +163,7 @@ Mit dem Multimeter zwischen **M+ und M−** messen: bei versorgtem Master müsse
 
 ---
 
-## Troubleshooting
 
-| Symptom | Ursache | Abhilfe |
-|---|---|---|
-| Keine Antwort, Timeouts | TX/RX vertauscht | Datenadern tauschen |
-| Keine Antwort | Busspannung zu niedrig | 12 V an VIN des Masters |
-| Antwort, aber nur Identifikationsdaten (Medium `0x0F`, keine Verbrauchswerte) | **Modul sitzt nicht auf dem Zähler** | Modul aufstecken, 10–15 min warten |
-| Telegramm kommt, aber Sensoren bleiben leer | `secondary_address` explizit gesetzt | Zeile auskommentieren (Wildcard nutzen), siehe unten |
-| Werte ändern sich nie | Modul liest den Zähler nur alle 10 min | `update_interval: 600s`, normal |
-| Datensalat / Prüfsummenfehler | UART-Parität | 2400 Baud, 8 **E**1 — Even-Parität ist Pflicht |
 
 ### Bekannte Einschränkung: `secondary_address`
 
