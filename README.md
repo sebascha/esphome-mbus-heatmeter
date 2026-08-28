@@ -4,7 +4,7 @@
 
 ---
 
-Wärmemengenzähler per **drahtgebundenem M-Bus** über einen ESP32 in Home Assistant einbinden — ohne Cloud, ohne Gateway, ohne Zusatzsoftware. Der ESP32 ist selbst der M-Bus-Master und liefert die Zählerwerte als native ESPHome-Sensoren.
+Wärmemengenzähler per **drahtgebundenem M-Bus** über einen ESP32 in Home Assistant einbinden. Der ESP32 mit M-Bus-Master liefert die Zählerwerte als native ESPHome-Sensoren.
 
 Ausgelesen werden je nach Zähler:
 
